@@ -116,7 +116,3 @@ A full-stack app for visualizing a school database with a React frontend and Nod
 - `backend/db/init.sql` — SQL schema and sample data
 
 ---
-
-## License
-
-MIT
