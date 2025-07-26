@@ -34,13 +34,13 @@ A full-stack app for visualizing a school database with a React frontend and Nod
 
 4. **Set up the database:**
    ```sh
-   mysql -u root -p < /Users/ice/Desktop/school-database-visualized/backend/db/init.sql
+   mysql -u root -p < ./backend/db/init.sql
    ```
    (Enter your MariaDB root password. If you haven't set one, just press Enter.)
 
 5. **Install backend and frontend dependencies:**
    ```sh
-   cd /Users/ice/Desktop/school-database-visualized/backend
+   cd backend
    npm install
    cd ../frontend
    npm install
@@ -48,13 +48,13 @@ A full-stack app for visualizing a school database with a React frontend and Nod
 
 6. **Start the backend server:**
    ```sh
-   cd /Users/ice/Desktop/school-database-visualized/backend
+   cd backend
    node server.js
    ```
 
 7. **Start the frontend dev server:**
    ```sh
-   cd /Users/ice/Desktop/school-database-visualized/frontend
+   cd frontend
    npm run dev
    ```
 
