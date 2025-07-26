@@ -2,57 +2,73 @@ DROP DATABASE IF EXISTS school;
 CREATE DATABASE school;
 USE school;
 
+CREATE TABLE Departments (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE Instructors (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    department_id INT,
+    FOREIGN KEY (department_id) REFERENCES Departments(id)
+);
+
 CREATE TABLE Students (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100),
-    grade INT,
-    class_id INT
+    name VARCHAR(100) NOT NULL,
+    year INT
 );
 
-CREATE TABLE Teachers (
+CREATE TABLE Courses (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100),
-    subject VARCHAR(100)
-);
-
-CREATE TABLE Classes (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100),
-    teacher_id INT,
-    FOREIGN KEY (teacher_id) REFERENCES Teachers(id)
+    name VARCHAR(100) NOT NULL,
+    department_id INT,
+    instructor_id INT,
+    FOREIGN KEY (department_id) REFERENCES Departments(id),
+    FOREIGN KEY (instructor_id) REFERENCES Instructors(id)
 );
 
 CREATE TABLE Enrollments (
     student_id INT,
-    class_id INT,
-    PRIMARY KEY (student_id, class_id),
+    course_id INT,
+    PRIMARY KEY (student_id, course_id),
     FOREIGN KEY (student_id) REFERENCES Students(id),
-    FOREIGN KEY (class_id) REFERENCES Classes(id)
+    FOREIGN KEY (course_id) REFERENCES Courses(id)
 );
 
 -- Sample data
-INSERT INTO Teachers (name, subject) VALUES 
-('Alice Smith', 'Math'), 
-('John Doe', 'History'),
-('Emily Turner', 'Science'),
-('Michael Brown', 'English'),
-('Linda White', 'Art');
+INSERT INTO Departments (name) VALUES 
+('Mathematics'),
+('History'),
+('Science'),
+('English'),
+('Arts');
 
-INSERT INTO Classes (name, teacher_id) VALUES 
-('Algebra I', 1), 
-('World History', 2),
-('Biology', 3),
-('English Literature', 4),
-('Painting', 5);
+INSERT INTO Instructors (name, department_id) VALUES 
+('Alice Smith', 1),
+('John Doe', 2),
+('Emily Turner', 3),
+('Michael Brown', 4),
+('Linda White', 5);
 
-INSERT INTO Students (name, grade, class_id) VALUES 
-('Tom Johnson', 10, 1),
-('Sara Lee', 11, 2),
-('Jake Miller', 10, 3),
-('Nina Patel', 12, 2),
-('Carlos Gomez', 11, 4),
-('Anna Kim', 9, 5),
-('Brian Lee', 12, 1);
+INSERT INTO Students (name, year) VALUES 
+('Tom Johnson', 2),
+('Sara Lee', 3),
+('Jake Miller', 2),
+('Nina Patel', 4),
+('Carlos Gomez', 3),
+('Anna Kim', 1),
+('Brian Lee', 4);
+
+INSERT INTO Courses (name, department_id, instructor_id) VALUES 
+('Algebra I', 1, 1),
+('World History', 2, 2),
+('Biology', 3, 3),
+('English Literature', 4, 4),
+('Painting', 5, 5),
+('Geometry', 1, 1),
+('Chemistry', 3, 3);
 
 INSERT INTO Enrollments VALUES 
 (1, 1),
@@ -64,4 +80,6 @@ INSERT INTO Enrollments VALUES
 (2, 1),
 (3, 1),
 (4, 5),
-(5, 3);
+(5, 3),
+(6, 6),
+(7, 7);
